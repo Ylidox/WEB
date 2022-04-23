@@ -1,0 +1,15 @@
+{
+  "name": "test2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index"
+  },
+  "author": "Im",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3",
+    "node-telegram-bot-api": "^0.56.0"
+  }
+}
