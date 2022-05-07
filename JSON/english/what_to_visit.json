@@ -1,0 +1,15 @@
+{
+	"head":{
+		"title": "What to visit?"
+	},
+	"body":{
+		"head_page": "What to visit?",
+		"country1": ["Dagestan", "Sulak Canyon", "Sarykum Dune", "Gamsult ghost village"],
+		"country2": ["Baikal", "Ushkany Islands", "Pomegranate Beach", "Olkhon Island"],
+		"country3": ["Altai", "Belukha Mountain", "Manzherok Lake", "Bolshoy Chulchinsky Waterfall"],
+		"head_add_comment": ["Add comment:", "Add comment:", "Add comment:"],
+		"comment_submit": ["Send!", "Send!", "Send!"],
+		"list_comment": ["Comments:", "Comments:", "Comments:"],
+		"footer":["Contacts", "Mail: tourist_tours@gmail.com ", "Phone: +7 495 850-13-31"]
+	}
+}

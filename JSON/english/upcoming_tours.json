@@ -1,0 +1,11 @@
+{
+	"head":{
+		"title":"Upcoming tours"
+	},
+	"body":{
+		"head_page":"Upcoming tours",
+		"tour1":["Berlin", "Visit one of the most impressive and unforgettable capitals of Europe", "The capital of Germany, a city with a rich history. It is worth seeing the Reichstag, the Brandenburg Gate and the remains of the Berlin Wall, as well as visiting famous museums and galleries."],
+		"tour2":["Paris", "Epicenter of romance, impressions, feelings and emotions, the most mysterious and beautiful capital of the world", "Walking in the rain through quiet streets, cute cafes with crispy croissants and fragrant coffee ... fashion boutiques with clothes from the most popular designers and fashion designers on the most popular street Faubourg Saint — Honoré"],
+		"footer":["Contacts", "Mail: tourist_tours@gmail.com ", "Phone: +7 495 850-13-31"]
+	}
+}
