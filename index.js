@@ -1,6 +1,8 @@
-var path = require('path');
-var express = require('express');
-var app = express();
+let path = require('path');
+let express = require('express');
+let app = express();
+let fs = require("fs");
+
 const PORT = process.env.PORT || 80;
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -24,16 +26,74 @@ app.get('/what_to_visit.html', (req, res) => {
     res.sendFile(`${__dirname}/public/pages/what_to_visit.html`);
 });
 
-app.listen(PORT, () => console.log("Сервер запущен..."));
-
+app.listen(PORT, () => console.log("port: " + PORT + " Сервер запущен..."));
 
 const jsonParser = express.json();
-app.post("/upcoming_tours.html", jsonParser, (request, response) => {
+
+let sendLangJSON = (request, response) => {
+	let lang = request.body.lang;
+	let file = request.body.file;
+	let fileContent = {err: "ошибка"};
+
+	if(lang == 'ru'){
+		fileContent = fs.readFileSync(`JSON/russian/${file}`, "utf8");
+	}
+	if(lang == 'en'){
+		fileContent = fs.readFileSync(`JSON/english/${file}`, "utf8");
+	}
+
+	fileContent = JSON.parse(fileContent);
+	response.json(fileContent);
+}
+
+app.post('/', jsonParser, (request, response) => {
 	console.log(request.body);
 	if(!request.body) return response.sendStatus(400);
 
-	response.json(request.body); // отправляем пришедший ответ обратно
+	if(request.body.lang){
+		sendLangJSON(request, response);
+	}
 });
+
+app.post('/upcoming_tours.html', jsonParser, (request, response) => {
+	console.log(request.body);
+	if(!request.body) return response.sendStatus(400);
+
+	if(request.body.lang){
+		sendLangJSON(request, response);
+	}
+});
+
+app.post("/what_to_visit.html", jsonParser, (request, response) => {
+	console.log(request.body);
+	if(!request.body) return response.sendStatus(400);
+
+	if(request.body.key){
+		let fileContent = fs.readFileSync("comments.json", "utf8");
+		let comments = JSON.parse(fileContent);
+		let name = request.body.name;
+		let text = request.body.text;
+		let key = request.body.key;
+		comments[key].unshift({name: name, text: text});
+		fileContent = JSON.stringify(comments);
+	
+		fs.writeFileSync("comments.json", fileContent);
+
+		response.json(request.body); // отправляем пришедший ответ обратно
+	}
+
+	if(request.body.comments){
+		let fileContent = fs.readFileSync("comments.json", "utf8");
+		let comments = JSON.parse(fileContent);
+		response.json(comments);
+	}
+
+	if(request.body.lang){
+		sendLangJSON(request, response);
+	}
+});
+
+
 
 
 const TelegramBot = require('node-telegram-bot-api')
